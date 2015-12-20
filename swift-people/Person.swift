@@ -9,19 +9,15 @@
 import Foundation
 
 class Person {
-    private let name:String
-    private var ageInYears:Int?
-    private var skills:[String]
-    private var qualifiedTutor:Bool {return false}
+    let name:String
+    var ageInYears:Int?
+    var skills:[String]
+    var qualifiedTutor:Bool {return false}
     
-    init(name:String, ageInYears:Int?, skills:[String]) {
+    init(name:String, ageInYears:Int?) {
         self.name = name
         self.ageInYears = ageInYears
-        self.skills = skills
-    }
-    
-    convenience init(name:String, ageInYears:Int?) {
-        self.init(name:name, ageInYears:ageInYears, skills:[String]())
+        self.skills = [String]()
     }
     
     convenience init(name:String) {
@@ -30,5 +26,15 @@ class Person {
     
     convenience init() {
         self.init(name:"John Doe")
+    }
+    
+    func celebrateBirthday()->String {
+        if let age = ageInYears {
+            let ordinalAge = String(age) + age.ordinal().capitalizedString
+            return "HAPPY \(ordinalAge) BIRTHDAY, \(self.name.capitalizedString)!!!"
+        }
+        else {
+            return "HAPPY BIRTHDAY, \(self.name.capitalizedString)!!!"
+        }
     }
 }
